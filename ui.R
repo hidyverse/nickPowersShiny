@@ -3,12 +3,10 @@
 # 30-07-23
 
 ### current goal: create US heatmap and column dropdown
-
-library(shiny)
-library(tidyverse)
+ 
 
 # Define UI for application that draws a histogram
-fluidPage(
+ui <- fluidPage(
 
     # Application title
     titlePanel("Nick Powers Data"),
@@ -16,12 +14,11 @@ fluidPage(
     # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
+        
           
-          selectInput("variable","Select Freedom Factor:",
-                      choices = c("Rule of Law"= "pf_rol",
-                                  "Homicides Reported" = "pf_ss_homicide")
-          )
-          
+          selectInput(inputId = "select",
+                      label = "Select Freedom Factor:", 
+                      choices = myData %>% select(-c(lat,long,group)) %>% colnames())
           
           # selectInput(inputId = "state",
           #             label = "Select state",
@@ -37,7 +34,7 @@ fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot")
+            plotOutput("heatMap")
         )
     )
 )
