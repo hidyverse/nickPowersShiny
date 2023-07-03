@@ -1,5 +1,6 @@
 
 library(bslib)     # themeing
+library(htmltools) # css styling
 library(leaflet)   # maps
 library(sf)        # spatial data helper
 library(shiny)
@@ -16,7 +17,7 @@ cards <- list(
   card(full_screen = TRUE,
        #   card_header("maps"),
        plotOutput("heatMap")),
-  card(full_screen = T,
+  card(
     varSelectInput("select",
                    "Select Freedom Factor:",
                    myData)),

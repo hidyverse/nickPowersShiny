@@ -13,18 +13,38 @@ ui <-
     ,
     theme = bs_theme(bootswatch = "sketchy")
     ,
-    sidebar = "test info here"
+   # sidebar = "test info here"
     # sidebarMenu(
     # menuItem("Home", tabName = "home", icon = icon("th")),
     # menuItem("Heatmaps of the US", tabName = "maps", icon = icon("dashboard")))
+    
+    nav_panel("Home", cards[[1]])
     ,
-    nav_panel("Home", cards[[1]]),
-    nav_panel("Maps", layout_columns(cards[[3]],  
-                                     cards[[4]], cards[[2]]
-                                     , col_widths = c( 3,9)
-                                     , row_heights = c(9, 3))) # did not finish layout
-  )
- 
+    nav_panel("Maps"
+    ,
+    layout_column_wrap(
+      width = 1/2, 
+      style = css(grid_template_columns = "3fr 1fr"),
+      navset_card_tab(
+        nav_panel(
+          "Heat Maps",
+      # layout_column_wrap(
+      #   width = 1 / 2,
+      #   style = css(grid_template_columns = "3fr 1fr"),
+          cards[[2]]),
+        nav_panel(
+        # layout_column_wrap(
+        #   width = 1,
+        #   row_heights = c(1, 4),
+        #   heights_equal = "row",
+          "Summary",
+          cards[[4]]
+        )
+      ),
+    cards[[3]]
+    )))
+    # did not finish layout)
+
  # dashboardPage(
  #    dashboardHeader(title = "NPD Dashboard Test"),
  #    
