@@ -11,26 +11,45 @@
 server <- function(input, output, session) {
     
 
-      
-output$heatMap <- renderPlot({
-       
-      inputSelect <- myData %>% 
-        select(input$select) %>% 
-        as_vector()
-        
-      ggplot() + 
-        geom_polygon( data= myData, aes(x=long
-                                     , y=lat
-                                     , group=group
-                                     , fill = inputSelect)) +
-                       
-        scale_fill_continuous(name=input$select
-                              , low = "lightgreen"
-                              , high = "darkgreen"
-                              # ,limits = c(0,4000)
-                              ,  na.value = "grey50") +
-        
-        labs(title=input$select)
-    })
+# observeEvent(input$select, {
+#   inputSelect <-  myData %>%
+#     select(input$select) %>%
+#     as_vector()
+#   print(inputSelect)
+# })
+#       
+
+  
+output$heatMap <- renderLeaflet({
+   
+
+  
+  pal <- colorNumeric(
+     palette = c("lightgreen", "darkgreen"),
+     domain = myData[[input$select]]
+   )
+    
+  labels <- sprintf(
+    "<strong>%s</strong><br/>%g",
+    myData$name, myData[[input$select]]
+  ) %>% lapply(htmltools::HTML)
+   
+    leaflet() %>%
+      addTiles() %>%
+      addPolygons(
+        data = myData,
+        fillColor = ~pal(myData[[input$select]]),
+        color = "black",
+        fillOpacity = 1
+        ,
+        label = ~labels
+      ) 
+      # addLegend("bottomright",
+      #   pal = pal,
+      #   values = myData[[input$select]],
+      #   title = colnames(myData$Top.1..Income),
+      #   opacity = 1
+      # )
+  })
 
 }
