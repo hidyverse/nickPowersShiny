@@ -1,4 +1,5 @@
 library(bslib)          # themeing
+library(DT)             # fancy table
 library(htmltools)      # css styling
 library(leaflet)        # maps
 library(sf)             # spatial data helper
@@ -18,8 +19,6 @@ myData <-  right_join(usa,
 cards <- list(
 
   card(full_screen = TRUE,
-       #   card_header("maps"),
-     #  plotOutput("heatMap")
      leafletOutput("heatMap")
      ),
   card(
