@@ -18,7 +18,7 @@ ui <-
     bg = "#FFFFFF"
     ,
     
-    nav_panel("Home", layout_columns(# cards[[1]]
+    nav_panel("Home", layout_columns(
       column(
         6,
         includeMarkdown("www/homePage.qmd")
@@ -31,20 +31,30 @@ ui <-
         width = 1 / 2,
         style = css(grid_template_columns = "5fr 1fr"),
         navset_card_tab(
-            nav_panel("Heat Maps",
-                      cardsHeatMaps[[1]],
-                      layout_column_wrap(
-                        width = 1/2,
-                        cardsState[[1]],
-                        cardsState[[2]])),
-            nav_panel(
-              "Summary",
-              cardsSummary)
+          nav_panel(
+            "Heat Maps",
+            cardsHeatMaps[[1]],
+            layout_column_wrap(width = 1 / 2,
+                               cardsState[[1]],
+                               cardsState[[2]])
           ),
+          nav_panel("Summary",
+                    cardsSummary)
+        ),
         cardsHeatMaps[[2]]
-      ))
-    , 
+      )
+    )
+    ,
     nav_panel(
-      "State comparisons"
+      "State comparisons",
+      layout_column_wrap(
+        width = 1 / 2,
+        height = "100px",
+        style = css(grid_template_columns = "1fr 9fr"),
+        cardsComparisons[[1]],
+        cardsComparisons[[2]]
+       )
+     ,
+     cardsComparisons[[3]]
     )
   )

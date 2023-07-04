@@ -7,7 +7,7 @@ library(leaflet)        # maps
 library(leaflet.extras) # pretty maps
 library(sf)             # spatial data helper
 library(shiny)          # app
-# library(thematic)     # bslib theme to ggplot
+library(thematic)     # bslib theme to ggplot
 library(tidyverse)      # happy place
 library(USAboundaries) # USA polygons
 avail <- requireNamespace("USAboundariesData", quietly = TRUE)
@@ -20,7 +20,10 @@ myData <-  right_join(usa,
                       by = c("name" = "State")) %>% 
   filter(name != c("Hawaii", "Alaska")) 
 
-
+myDataSelections <- names(myData %>% select(`Size  Sq Miles`, `Population`, 33:270))
+  
+mySelections <- names(myData %>% select(`Size  Sq Miles`, `Population`, `MedianWage HR`))
+  
 ### Hallmark 
 cardsHeatMaps <- list(
   
@@ -55,6 +58,21 @@ cardsState <- list(
     textOutput("Lowest")
   ))
 
+cardsComparisons <- list(
+  card(
+    verbatimTextOutput('stateCompare'),
+    selectizeInput('state', 'Select two states to compare:', myData$name, multiple=TRUE, options = list(maxItems = 2))
+  ),
+  card(
+    checkboxGroupInput("showVars", "Columns to show:",
+                       myDataSelections, selected = mySelections)
+  ),
+  card(
+    card_body(
+  dataTableOutput("compareTable"),
+  width = "100%"
+  ))
+)
 
 ### Theming
 myTheme <- bs_add_variables(
@@ -67,6 +85,8 @@ myTheme <- bs_add_variables(
   "btn-padding-x" = "2rem"
 )
 
+ggplot2::theme_set(ggplot2::theme_minimal())
+thematic_shiny(font = "auto")
 
 ### Run it
 source("ui.R")

@@ -48,15 +48,31 @@ output$heatMap <- renderLeaflet({
 # Add nationwide summary 
 output$sumUS <- renderPlot({
   
-  
-  # inputSelect <- myData %>% 
-  #   select(input$select) %>% 
-  #   as_vector()
-  
   ggplot() + 
     geom_histogram(data = myData,
                    aes(x = .data[[input$select]])) 
 })
+  
+
+# Add state comparisons
+
+# choose columns to display
+# but don't display the selection
+output$stateCompare <- renderPrint({invisible(input$state)})
+
+
+selectedData <- reactive({
+  myData %>% filter(name %in% input$state) %>% as.data.frame()
+})
+
+
+output$compareTable <- renderDataTable({
+    
+    myData1 <- selectedData()
+    myData1
+
+  })
 
 }
-  
+
+
