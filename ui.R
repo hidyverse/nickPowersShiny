@@ -29,12 +29,22 @@ ui <-
       ,
       layout_column_wrap(
         width = 1 / 2,
-        style = css(grid_template_columns = "3fr 1fr"),
-        navset_card_tab(nav_panel("Heat Maps",
-                                  cards[[1]]),
-                        nav_panel("Summary",
-                                  cards[[3]])),
-        cards[[2]]
-      )
+        style = css(grid_template_columns = "5fr 1fr"),
+        navset_card_tab(
+            nav_panel("Heat Maps",
+                      cardsHeatMaps[[1]],
+                      layout_column_wrap(
+                        width = 1/2,
+                        cardsState[[1]],
+                        cardsState[[2]])),
+            nav_panel(
+              "Summary",
+              cardsSummary)
+          ),
+        cardsHeatMaps[[2]]
+      ))
+    , 
+    nav_panel(
+      "State comparisons"
     )
   )

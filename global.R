@@ -1,3 +1,5 @@
+### Free little library
+
 library(bslib)          # themeing
 library(DT)             # fancy table
 library(htmltools)      # css styling
@@ -10,6 +12,7 @@ library(tidyverse)      # happy place
 library(USAboundaries) # USA polygons
 avail <- requireNamespace("USAboundariesData", quietly = TRUE)
 
+### Data Bank
 usa <- us_states()
 
 myData <-  right_join(usa,
@@ -18,22 +21,42 @@ myData <-  right_join(usa,
   filter(name != c("Hawaii", "Alaska")) 
 
 
-cards <- list(
-
+### Hallmark 
+cardsHeatMaps <- list(
+  
+  # main map
   card(full_screen = TRUE,
      leafletOutput("heatMap")
      ),
+
+  # selection input
   card(
     varSelectInput("select",
                    "Select Freedom Factor:",
                    myData %>% select(-c(1:14, geometry)))
-    ),
-  card(full_screen = T,
-    card_body(
-       DTOutput("sumUS"),
-       width = "100%") 
-))
+    ))
 
+cardsSummary <- card(full_screen = T,
+                     card_body(
+                       plotOutput("sumUS"),
+                       width = "100%") 
+)
+
+
+cardsState <- list(
+  
+  # highest state
+  card(full_screen = TRUE,
+       textOutput("Highest")
+  ),
+  
+  # lowest state
+  card(
+    textOutput("Lowest")
+  ))
+
+
+### Theming
 myTheme <- bs_add_variables(
   bs_theme(bootswatch = "sketchy", primary = "#000000"),
   "body-bg" = "#FFFFFF",
@@ -45,6 +68,7 @@ myTheme <- bs_add_variables(
 )
 
 
+### Run it
 source("ui.R")
 source("server.R")
 

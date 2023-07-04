@@ -9,15 +9,6 @@
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
-    
-#  bs_themer()
-# observeEvent(input$select, {
-#   inputSelect <-  myData %>%
-#     select(input$select) %>%
-#     as_vector()
-#   print(inputSelect)
-# })
-#       
 
   
 output$heatMap <- renderLeaflet({
@@ -54,9 +45,18 @@ output$heatMap <- renderLeaflet({
   })
 
 
-# Add nationwide summary statistics
-output$sumUS <- renderDT(
-
-  myData)
+# Add nationwide summary 
+output$sumUS <- renderPlot({
+  
+  
+  # inputSelect <- myData %>% 
+  #   select(input$select) %>% 
+  #   as_vector()
+  
+  ggplot() + 
+    geom_histogram(data = myData,
+                   aes(x = .data[[input$select]])) 
+})
 
 }
+  
