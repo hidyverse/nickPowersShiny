@@ -8,17 +8,21 @@
 # Define UI for application that draws a histogram
 ui <-
   
+  
+  
   page_navbar(
-    title = "NPD Dashboard BS Test"
+    # title = '<p><img src="www/TikTok-icon.png" alt="music note tiktok logo" width="20" height="20" /></p>'
+    # ,
+    theme = myTheme
     ,
-    theme = bs_theme(bootswatch = "sketchy")
+    bg = "#FFFFFF"
     ,
-    nav_panel("Home", layout_columns(
-     # cards[[1]]
-      column(6,
+    
+    nav_panel("Home", layout_columns(# cards[[1]]
+      column(
+        6,
         includeMarkdown("www/homePage.qmd")
-      )
-    ))
+      )))
     ,
     nav_panel(
       "Maps"

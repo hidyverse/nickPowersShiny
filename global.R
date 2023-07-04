@@ -5,6 +5,7 @@ library(leaflet)        # maps
 library(leaflet.extras) # pretty maps
 library(sf)             # spatial data helper
 library(shiny)          # app
+# library(thematic)     # bslib theme to ggplot
 library(tidyverse)      # happy place
 library(USAboundaries) # USA polygons
 avail <- requireNamespace("USAboundariesData", quietly = TRUE)
@@ -32,6 +33,17 @@ cards <- list(
        DTOutput("sumUS"),
        width = "100%") 
 ))
+
+myTheme <- bs_add_variables(
+  bs_theme(bootswatch = "sketchy", primary = "#000000"),
+  "body-bg" = "#FFFFFF",
+  "color" = "#000000",
+  "base-font" = "Proxima Nova – Semibold",
+  "font-size-base" = "1.4rem",
+  "btn-padding-y" = ".16rem",
+  "btn-padding-x" = "2rem"
+)
+
 
 source("ui.R")
 source("server.R")

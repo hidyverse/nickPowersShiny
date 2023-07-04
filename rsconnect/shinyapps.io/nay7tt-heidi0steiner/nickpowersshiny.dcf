@@ -5,7 +5,10 @@ account: nay7tt-heidi0steiner
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9403013
-bundleId: 7416389
+bundleId: 7416484
 url: https://nay7tt-heidi0steiner.shinyapps.io/nickpowersshiny/
-when: 1688429744.25138
-lastSyncTime: 1688429744.2514
+when: 1688433856.66862
+lastSyncTime: 1688433856.66863
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/clean.R|data/NPD_Spreadsheet-2023-06-29.csv

@@ -10,7 +10,7 @@
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
     
-
+#  bs_themer()
 # observeEvent(input$select, {
 #   inputSelect <-  myData %>%
 #     select(input$select) %>%
