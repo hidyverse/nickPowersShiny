@@ -3,7 +3,6 @@ library(htmltools)      # css styling
 library(leaflet)        # maps
 library(sf)             # spatial data helper
 library(shiny)          # app
-library(shinydashboard) # dash style (do I need this?)
 library(tidyverse)      # happy place
 library(USAboundaries) # USA polygons
 avail <- requireNamespace("USAboundariesData", quietly = TRUE)
@@ -17,9 +16,7 @@ myData <-  right_join(usa,
 
 
 cards <- list(
-  card(full_screen = TRUE,
-       #   card_header("home"),
-       "testing landing page"),
+
   card(full_screen = TRUE,
        #   card_header("maps"),
      #  plotOutput("heatMap")
@@ -31,8 +28,10 @@ cards <- list(
                    myData %>% select(-c(1:14, geometry)))
     ),
   card(full_screen = T,
-       tableOutput("sumUS")) # did not finish table
-)
+    card_body(
+       verbatimTextOutput("sumUS"),
+       width = "100%") 
+))
 
 source("ui.R")
 source("server.R")

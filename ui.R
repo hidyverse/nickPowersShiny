@@ -1,9 +1,9 @@
 #
-# This is the user-interface definition of the NPD Shiny application. 
+# This is the user-interface definition of the NPD Shiny application.
 # 30-07-23
 
-### current goal: update to leaflet
- 
+### current goal: add nationwide summary table
+
 
 # Define UI for application that draws a histogram
 ui <-
@@ -13,34 +13,24 @@ ui <-
     ,
     theme = bs_theme(bootswatch = "sketchy")
     ,
-   # sidebar = "test info here"
-    # sidebarMenu(
-    # menuItem("Home", tabName = "home", icon = icon("th")),
-    # menuItem("Heatmaps of the US", tabName = "maps", icon = icon("dashboard")))
-    
-    nav_panel("Home", cards[[1]])
+    nav_panel("Home", layout_columns(
+     # cards[[1]]
+      column(6,
+        includeMarkdown("www/homePage.qmd")
+      )
+    ))
     ,
-    nav_panel("Maps"
-    ,
-    layout_column_wrap(
-      width = 1/2, 
-      style = css(grid_template_columns = "3fr 1fr"),
-      navset_card_tab(
-        nav_panel(
-          "Heat Maps",
-      # layout_column_wrap(
-      #   width = 1 / 2,
-      #   style = css(grid_template_columns = "3fr 1fr"),
-          cards[[2]]),
-        nav_panel(
-        # layout_column_wrap(
-        #   width = 1,
-        #   row_heights = c(1, 4),
-        #   heights_equal = "row",
-          "Summary",
-          cards[[4]]
-        )
-      ),
-    cards[[3]]
-    )))
-   
+    nav_panel(
+      "Maps"
+      ,
+      layout_column_wrap(
+        width = 1 / 2,
+        style = css(grid_template_columns = "3fr 1fr"),
+        navset_card_tab(nav_panel("Heat Maps",
+                                  cards[[1]]),
+                        nav_panel("Summary",
+                                  cards[[3]])),
+        cards[[2]]
+      )
+    )
+  )

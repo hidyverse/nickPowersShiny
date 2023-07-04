@@ -1,0 +1,10 @@
+---
+format: html
+editor: visual
+---
+
+[![](thatnickpowersguy.png){fig-align="center" width="900"}](https://www.tiktok.com/@thatnickpowersguy)
+
+Inspired by the Tiktok creator [\@thatnickpowersguy](https://www.tiktok.com/@thatnickpowersguy?lang=en), my recent move to Connecticut, and an upcoming very exciting-job interview, I am designing this Shiny Dashboard to make comparisons between states across the nation.
+
+The dataset in use is static, and was acquired on June 30, 2023 from Nick Powers' [personal website](https://www.thatnickpowersguy.com/).

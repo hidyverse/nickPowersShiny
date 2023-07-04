@@ -47,9 +47,23 @@ output$heatMap <- renderLeaflet({
       # addLegend("bottomright",
       #   pal = pal,
       #   values = myData[[input$select]],
-      #   title = colnames(myData$Top.1..Income),
+      #   title = colnames(myData[[input$select]]),
       #   opacity = 1
       # )
   })
+
+
+# Add nationwide summary statistics
+output$sumUS <- renderPrint({
+
+  inputSelect <- myData %>% 
+    as_tibble() %>% 
+    select(input$select) %>% 
+    as_vector()
+  
+  myData %>% 
+    as_tibble %>% 
+    summarise(Mean = mean(inputSelect), SD = sd(inputSelect))
+})
 
 }
