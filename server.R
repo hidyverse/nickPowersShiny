@@ -35,13 +35,12 @@ output$heatMap <- renderLeaflet({
   ) %>% lapply(htmltools::HTML)
    
     leaflet() %>%
-      addTiles() %>%
       addPolygons(
         data = myData,
         fillColor = ~pal(myData[[input$select]]),
         color = "black",
-        fillOpacity = 1
-        ,
+        fillOpacity = 1,
+        weight = 1,
         label = ~labels
       ) %>% 
       addLegend("bottomright",
@@ -49,7 +48,9 @@ output$heatMap <- renderLeaflet({
         values = myData[[input$select]],
         title = colnames(myData[[input$select]]),
         opacity = 1
-      )
+      ) %>%
+      
+      setMapWidgetStyle(list(background= "white"))
   })
 
 

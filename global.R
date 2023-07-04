@@ -2,6 +2,7 @@ library(bslib)          # themeing
 library(DT)             # fancy table
 library(htmltools)      # css styling
 library(leaflet)        # maps
+library(leaflet.extras) # pretty maps
 library(sf)             # spatial data helper
 library(shiny)          # app
 library(tidyverse)      # happy place
