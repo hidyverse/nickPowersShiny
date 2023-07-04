@@ -13,7 +13,7 @@ usa <- us_states()
 myData <-  right_join(usa,
                       read_csv("data/NPDClean.csv"),
                       by = c("name" = "State")) %>% 
-  filter(name != c("Hawaii", "Alaska"))
+  filter(name != c("Hawaii", "Alaska")) 
 
 
 cards <- list(
@@ -28,7 +28,7 @@ cards <- list(
     ),
   card(full_screen = T,
     card_body(
-       verbatimTextOutput("sumUS"),
+       DTOutput("sumUS"),
        width = "100%") 
 ))
 

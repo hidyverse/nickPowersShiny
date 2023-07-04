@@ -54,16 +54,8 @@ output$heatMap <- renderLeaflet({
 
 
 # Add nationwide summary statistics
-output$sumUS <- renderPrint({
+output$sumUS <- renderDT(
 
-  inputSelect <- myData %>% 
-    as_tibble() %>% 
-    select(input$select) %>% 
-    as_vector()
-  
-  myData %>% 
-    as_tibble %>% 
-    summarise(Mean = mean(inputSelect), SD = sd(inputSelect))
-})
+  myData)
 
 }
