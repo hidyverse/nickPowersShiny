@@ -43,13 +43,13 @@ output$heatMap <- renderLeaflet({
         fillOpacity = 1
         ,
         label = ~labels
-      ) 
-      # addLegend("bottomright",
-      #   pal = pal,
-      #   values = myData[[input$select]],
-      #   title = colnames(myData[[input$select]]),
-      #   opacity = 1
-      # )
+      ) %>% 
+      addLegend("bottomright",
+        pal = pal,
+        values = myData[[input$select]],
+        title = colnames(myData[[input$select]]),
+        opacity = 1
+      )
   })
 
 
