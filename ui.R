@@ -35,6 +35,7 @@ ui <-
             "Heat Maps",
             cardsHeatMaps[[1]],
             layout_column_wrap(width = 1 / 2,
+                               height = "100px",
                                cardsState[[1]],
                                cardsState[[2]])
           ),

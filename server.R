@@ -44,13 +44,55 @@ output$heatMap <- renderLeaflet({
       setMapWidgetStyle(list(background= "white"))
   })
 
+# Boxes for highest and lowest state
+### LOWEST 
+
+lowestState <- reactive({
+  myData %>% arrange(!! input$select) %>% slice_head(n = 1)
+})
+
+output$lowest<-renderPlot({
+  
+  lowestStateDat <- lowestState()
+  
+  flagName <-  tolower(myData$name[myData$name == lowestStateDat$name])
+  flagName <- gsub(" ", "_", flagName)
+  
+  print(flagName)
+  
+  srcFlag <- paste0("www/flags_of_US_states/",flagName,".png")
+  
+  print(srcFlag)
+  # flag <- readPNG(source = srcFlag)
+  # print(flag)
+  
+  # # Download the image file and store it in a temporary directory
+  # grid.raster(flag, interpolate = F,height=unit(.1, "npc"), width=unit(.1, "npc"))
+  
+  png(srcFlag,
+      width = unit(.1, "npc"),
+      height = unit(.1, "npc"))
+
+  dev.off()
+  
+ 
+  })
+
+
 
 # Add nationwide summary 
-output$sumUS <- renderPlot({
+output$sumUS <- renderPlotly({
   
-  ggplot() + 
+  p <- ggplot() 
+  p <- p + 
     geom_histogram(data = myData,
-                   aes(x = .data[[input$select]])) 
+                   aes(x = .data[[input$select]]
+                       , group = name),
+                   fill = "lightgreen")
+  
+  ggplotly(p)
+  
+  
 })
   
 
@@ -59,10 +101,15 @@ output$sumUS <- renderPlot({
 # choose columns to display
 # but don't display the selection
 output$stateCompare <- renderPrint({invisible(input$state)})
+output$columnShow <- renderPrint({invisible(input$showVars)})
 
 
 selectedData <- reactive({
-  myData %>% filter(name %in% input$state) %>% as.data.frame()
+  myData %>% 
+    filter(name %in% input$state) %>% 
+    select(name, !! input$showVars) %>% 
+    as.data.frame() %>% 
+    select(-geometry)
 })
 
 
