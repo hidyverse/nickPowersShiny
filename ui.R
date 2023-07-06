@@ -9,7 +9,7 @@ ui <-
   
   
   page_navbar(
-    title = tags$img(src='TikTok-icon.png', height = '60', width ='60')
+    title = tags$img(src='https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962994_1280.png', height = '40', width ='40')
     ,
     theme = myTheme
     ,

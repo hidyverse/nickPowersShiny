@@ -52,15 +52,25 @@
   cardsState <- list(
     
     # highest state
-    card(full_screen = TRUE,
-         imageOutput("highest")
-    ),
+    card(card_header("Highest"),
+         card_body(
+           layout_column_wrap(
+             width = 1/2,
+             imageOutput("highest")
+             ,span(textOutput("highestState"), style = "color:darkgreen; font-size:30px; font-style:italic"))    
+           )),
     
     # lowest state
     card(
-      imageOutput("lowest"),
-      full_screen = T
+      card_header("Lowest"),
+      card_body(
+        layout_column_wrap(
+          width = 1/2,
+          imageOutput("lowest"),
+          span(textOutput("lowestState"), style = "color:lightgreen; font-size:30px; font-style:italic"))
+      , full_screen = T
     ))
+    )
   
   cardsComparisons <- list(
     card(

@@ -16,7 +16,7 @@ output$heatMap <- renderLeaflet({
 
   
   pal <- colorNumeric(
-     palette = c("darkgreen", "lightgreen"),
+     palette = c( "lightgreen", "darkgreen"),
      domain = myData[[input$select]]
    )
     
@@ -38,7 +38,7 @@ output$heatMap <- renderLeaflet({
         pal = pal,
         values = myData[[input$select]],
         title = colnames(myData[[input$select]]),
-        labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)),
+        # labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)),
         opacity = 1
       ) %>%
       
@@ -59,22 +59,29 @@ output$lowest<-renderImage({
   flagName <-  tolower(myData$name[myData$name == lowestStateDat$name])
   flagName <- gsub(" ", "_", flagName)
   
-  print(flagName)
-  
+
   srcFlag <- paste0("www/flags_of_US_states/",flagName,".png")
 
   list(
     src = srcFlag
+    , width = "60"
+    , height = "50"
   )
 
   
   }, deleteFile = FALSE)
 
+output$lowestState <- renderText({
+  lowestStateDat <- lowestState()
+  
+  flagName <-  myData$name[myData$name == lowestStateDat$name]
+})
 ## HIGHEST
 
 highestState <- reactive({
   myData %>% arrange(!! input$select) %>% slice_tail(n = 1)
 })
+
 
 output$highest <-renderImage({
   
@@ -83,16 +90,22 @@ output$highest <-renderImage({
   flagName <-  tolower(myData$name[myData$name == highestStateDat$name])
   flagName <- gsub(" ", "_", flagName)
   
-  print(flagName)
-  
   srcFlag <- paste0("www/flags_of_US_states/",flagName,".png")
   
   list(
     src = srcFlag
+    , width = "60"
+    , height = "50"
   )
   
   
 }, deleteFile = FALSE)
+
+output$highestState <- renderText({
+  highestStateDat <- highestState()
+  
+  flagName <-  myData$name[myData$name == highestStateDat$name]
+})
 
 # Add nationwide summary 
 output$sumUS <- renderPlotly({
