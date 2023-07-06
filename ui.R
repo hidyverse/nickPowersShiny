@@ -2,8 +2,6 @@
 # This is the user-interface definition of the NPD Shiny application.
 # 30-07-23
 
-### current goal: add nationwide summary table
-
 
 # Define UI for application that draws a histogram
 ui <-
@@ -11,8 +9,8 @@ ui <-
   
   
   page_navbar(
-    # title = '<p><img src="www/TikTok-icon.png" alt="music note tiktok logo" width="20" height="20" /></p>'
-    # ,
+    title = tags$img(src='TikTok-icon.png', height = '60', width ='60')
+    ,
     theme = myTheme
     ,
     bg = "#FFFFFF"

@@ -53,12 +53,13 @@
     
     # highest state
     card(full_screen = TRUE,
-         htmlOutput("Highest")
+         imageOutput("highest")
     ),
     
     # lowest state
     card(
-      plotOutput("lowest")
+      imageOutput("lowest"),
+      full_screen = T
     ))
   
   cardsComparisons <- list(
